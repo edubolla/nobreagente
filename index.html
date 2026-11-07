@@ -78,7 +78,7 @@
     <ul>
       <li>Leva uns 15 a 20 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
       <li>Não sabe a resposta? Marque <b>"Não sei / outra pessoa responde"</b>. Pode deixar em branco também.</li>
-      <li>No fim, aperte <b>Enviar respostas</b>. Se algo falhar, há um botão para mandar pelo WhatsApp ou baixar o arquivo.</li>
+      <li>No fim, aperte <b>Enviar respostas</b>. Se algo falhar, há um botão para baixar o arquivo.</li>
     </ul>
   </div>
   <div class="saved" id="saved"></div>
@@ -90,7 +90,6 @@
       <p class="sub">Confira se quiser e envie. Dá para enviar de novo depois se lembrar de algo.</p>
       <div class="actions">
         <button type="submit" class="primary" id="send">Enviar respostas</button>
-        <button type="button" id="wa">Enviar pelo WhatsApp</button>
         <button type="button" id="dl">Baixar arquivo .md</button>
       </div>
       <div class="msg" id="msg"></div>
@@ -102,7 +101,6 @@
 // ====== CONFIGURAÇÃO ======
 const SUPABASE_URL = "https://ilursypxumuuwuhrqmde.supabase.co";
 const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsdXJzeXB4dW11dXd1aHJxbWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNzIyNzEsImV4cCI6MjEwOTY0ODI3MX0.xh-Srhwj0T_xg-W4EJeZHhviTLax659VwxSnkamS_6I";
-const WHATSAPP_DESTINO = "5551993022314"; // só números, com 55 + DDD
 const STORE_KEY = "nobre_form_v1";
 
 // ====== PERGUNTAS ======
@@ -304,18 +302,13 @@ $("#f").addEventListener("submit", async e => {
     if(!r.ok) throw new Error("HTTP " + r.status);
     msg("Respostas enviadas. Muito obrigado! Se lembrar de mais algo, é só preencher e enviar de novo.", "ok");
   }catch(err){
-    msg("Não consegui enviar agora. Use os botões 'Enviar pelo WhatsApp' ou 'Baixar arquivo .md' abaixo. Suas respostas continuam salvas neste aparelho.", "err");
+    msg("Não consegui enviar agora. Use o botão 'Baixar arquivo .md' abaixo e envie o arquivo para nós. Suas respostas continuam salvas neste aparelho.", "err");
   }finally{ btn.disabled = false; btn.textContent = "Enviar respostas"; }
 });
 $("#dl").addEventListener("click", () => {
   const blob = new Blob([buildMD()], {type:"text/markdown;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
   a.download = "respostas-nobre-" + new Date().toISOString().slice(0,10) + ".md"; a.click(); URL.revokeObjectURL(a.href);
-});
-$("#wa").addEventListener("click", () => {
-  let t = buildMD();
-  if(t.length > 3500){ t = t.slice(0, 3400) + "\n\n…(resposta longa: vou também enviar o arquivo .md)"; alert("O texto é grande para o WhatsApp. Vou enviar o começo. Use também 'Baixar arquivo .md' e anexe o arquivo na conversa."); }
-  window.open("https://wa.me/" + WHATSAPP_DESTINO + "?text=" + encodeURIComponent(t), "_blank");
 });
 </script>
 </body>

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nobre Alfaiataria · Formulário do atendimento</title>
+<style>
+  :root{
+    --bg:#f7f5f0; --card:#ffffff; --ink:#1b1a17; --muted:#6b675e; --line:#e4dfd3;
+    --gold:#b8922f; --gold-d:#8f6f1c; --dark:#15130f; --ok:#2f7a4b; --err:#b3392f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121110; --card:#1c1a17; --ink:#f1ede4; --muted:#a39d90; --line:#33302a;
+      --gold:#d4ad4a; --gold-d:#e6c46a; --dark:#0b0a09;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  header{background:var(--dark);color:#f1ede4;padding:28px 16px 22px;text-align:center;border-bottom:3px solid var(--gold)}
+  header h1{margin:0 0 6px;font:600 26px/1.2 Georgia,"Times New Roman",serif;letter-spacing:.5px;color:#e6c46a}
+  header p{margin:0 auto;max-width:560px;color:#d8d2c3;font-size:15px}
+  .bar{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px}
+  .bar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+  .track{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0;background:var(--gold);transition:width .3s}
+  main{max-width:760px;margin:0 auto;padding:20px 16px 80px}
+  .intro{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:15px}
+  .intro li{margin:4px 0}
+  section.blk{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;margin-bottom:18px}
+  section.blk>h2{margin:0 0 4px;font:600 21px/1.25 Georgia,serif}
+  section.blk>.sub{margin:0 0 14px;color:var(--muted);font-size:14px}
+  .q{padding:14px 0;border-top:1px solid var(--line)}
+  .q:first-of-type{border-top:0}
+  .q label.t{display:block;font-weight:600;margin-bottom:4px}
+  .hint{color:var(--muted);font-size:13px;margin:0 0 8px}
+  input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  textarea{min-height:84px;resize:vertical}
+  input[type=text]:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--line);border-radius:99px;background:var(--bg);cursor:pointer;font-size:15px}
+  .opt input{accent-color:var(--gold)}
+  .opt:has(input:checked){border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,transparent)}
+  .ns{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:13px;color:var(--muted);cursor:pointer}
+  .ns input{accent-color:var(--muted)}
+  .fu{margin-top:8px}
+  .q.is-ns .field{opacity:.4;pointer-events:none}
+  table.mx{width:100%;border-collapse:collapse;font-size:14px}
+  table.mx th,table.mx td{padding:8px 4px;text-align:center;border-bottom:1px solid var(--line)}
+  table.mx th:first-child,table.mx td:first-child{text-align:left}
+  table.mx input{accent-color:var(--gold);width:18px;height:18px}
+  .row{display:grid;gap:8px;grid-template-columns:repeat(var(--n),1fr);margin-bottom:8px}
+  .row.faq{grid-template-columns:1fr}
+  @media (max-width:560px){.row{grid-template-columns:1fr;padding:10px;border:1px dashed var(--line);border-radius:8px}}
+  button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--gold);padding:11px 18px;background:transparent;color:var(--gold-d);font-weight:600}
+  button.primary{background:var(--gold);color:#17130a;border-color:var(--gold)}
+  button:disabled{opacity:.5;cursor:wait}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:15px;display:none}
+  .msg.ok{display:block;background:color-mix(in srgb,var(--ok) 14%,transparent);border:1px solid var(--ok)}
+  .msg.err{display:block;background:color-mix(in srgb,var(--err) 12%,transparent);border:1px solid var(--err)}
+  .saved{font-size:12px;color:var(--muted);text-align:right;margin-top:-8px;margin-bottom:10px}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Nobre Alfaiataria</h1>
+  <p>Formulário para deixarmos o atendimento por WhatsApp afinado com a realidade da loja.</p>
+</header>
+<div class="bar"><div class="bar-in"><span id="pct">0%</span><div class="track"><div class="fill" id="fill"></div></div><span id="cnt">0 respondidas</span></div></div>
+
+<main>
+  <div class="intro">
+    <strong>Como funciona</strong>
+    <ul>
+      <li>Leva uns 15 a 20 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
+      <li>Não sabe a resposta? Marque <b>"Não sei / outra pessoa responde"</b>. Pode deixar em branco também.</li>
+      <li>No fim, aperte <b>Enviar respostas</b>. Se algo falhar, há um botão para mandar pelo WhatsApp ou baixar o arquivo.</li>
+    </ul>
+  </div>
+  <div class="saved" id="saved"></div>
+  <form id="f" novalidate>
+    <input class="hp" type="text" name="site" id="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div id="root"></div>
+    <section class="blk">
+      <h2>Enviar</h2>
+      <p class="sub">Confira se quiser e envie. Dá para enviar de novo depois se lembrar de algo.</p>
+      <div class="actions">
+        <button type="submit" class="primary" id="send">Enviar respostas</button>
+        <button type="button" id="wa">Enviar pelo WhatsApp</button>
+        <button type="button" id="dl">Baixar arquivo .md</button>
+      </div>
+      <div class="msg" id="msg"></div>
+    </section>
+  </form>
+</main>
+
+<script>
+// ====== CONFIGURAÇÃO ======
+const SUPABASE_URL = "https://ilursypxumuuwuhrqmde.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsdXJzeXB4dW11dXd1aHJxbWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNzIyNzEsImV4cCI6MjEwOTY0ODI3MX0.xh-Srhwj0T_xg-W4EJeZHhviTLax659VwxSnkamS_6I";
+const WHATSAPP_DESTINO = ""; // ex.: "5511999999999" (só números, com 55 + DDD). Vazio = o WhatsApp pergunta para quem enviar.
+const STORE_KEY = "nobre_form_v1";
+
+// ====== PERGUNTAS ======
+const SIM_NAO = ["Sim", "Não"];
+const SCHEMA = [
+ {id:"quem", title:"Quem está respondendo", sub:"Só para sabermos com quem tirar dúvidas depois.", qs:[
+  {id:"nome", t:"Seu nome", type:"text", noNS:true},
+  {id:"funcao", t:"Sua função na Nobre", type:"text", noNS:true},
+ ]},
+ {id:"dados", title:"1. Dados da loja", sub:"Confira o que já temos. Marque Sim se estiver certo.", qs:[
+  {id:"end", t:"Endereço: Rua Adolfo Bastos, 197, Vila Bastos, Santo André. Está correto?", type:"choice", opts:SIM_NAO, fu:{when:"Não", label:"Qual é o correto?"}},
+  {id:"wpp", t:"O WhatsApp (11) 96402-4861 é o número de atendimento a clientes?", type:"choice", opts:SIM_NAO, fu:{when:"Não", label:"Qual número usar?"}},
+  {id:"tel", t:"Telefone fixo (11) 4426-4704. Está correto?", type:"choice", opts:SIM_NAO, fu:{when:"Não", label:"Qual é o correto?"}},
+  {id:"hor", t:"Horário: segunda a sexta, 9h às 18h45; sábado, 9h às 17h45. Está correto?", type:"choice", opts:SIM_NAO, fu:{when:"Não", label:"Quais são os horários corretos?"}},
+  {id:"dom", t:"Abrem domingo ou em feriados?", type:"choice", opts:["Não abrimos","Abrimos em alguns","Abrimos"], fu:{when:["Abrimos em alguns","Abrimos"], label:"Em quais dias e horários?"}},
+  {id:"est", t:"Estacionamento: como funciona para o cliente?", type:"area", hint:"Vaga própria, convênio, valor, onde estacionar."},
+ ]},
+ {id:"loc", title:"2. Locação (aluguel)", sub:"Como o aluguel funciona hoje.", qs:[
+  {id:"loc_mx", t:"O que entra no aluguel?", type:"matrix", items:["Paletó","Calça","Colete","Camisa","Sapato","Gravata ou gravata borboleta","Cinto","Suspensório","Lenço de bolso","Ajustes","Higienização"], cols:["Incluso","Cobrado à parte","Não oferecemos"]},
+  {id:"loc_ret", t:"Retirada na quinta ou sexta antes do evento e devolução na segunda. Essa é a regra padrão?", type:"choice", opts:SIM_NAO, fu:{when:"Não", label:"Qual é a regra?"}},
+  {id:"loc_ant", t:"Com quanto tempo de antecedência dá para alugar?", type:"area", hint:"Mínimo e o ideal. Se muda para casamento, explique."},
+  {id:"loc_res", t:"Como funciona a reserva e o sinal?", type:"area", hint:"Quando reserva, quanto paga de sinal, o que acontece se desistir."},
+  {id:"loc_cau", t:"Tem caução (depósito de garantia)?", type:"choice", opts:["Sim","Não"], fu:{when:"Sim", label:"Qual valor e como funciona?"}},
+  {id:"loc_av", t:"E se o traje voltar com defeito, sujo ou rasgado?", type:"area"},
+  {id:"loc_atr", t:"E se a devolução atrasar?", type:"area"},
+  {id:"loc_prov", t:"Quantas provas existem na locação?", type:"text"},
+ ]},
+ {id:"val", title:"3. Valores", sub:"Pode digitar de forma simples. Se tiver uma tabela pronta, descreva ou cole aqui.", qs:[
+  {id:"v_loc", t:"Valores de locação", type:"rows", noNS:false, cols:[{k:"modelo",l:"Traje ou pacote",ph:"Ex.: Terno slim azul"},{k:"valor",l:"Valor",ph:"R$"},{k:"inclui",l:"O que inclui",ph:"Ex.: paletó, calça, colete"}], min:3},
+  {id:"v_cmp", t:"Valores de compra de traje pronto", type:"rows", cols:[{k:"modelo",l:"Linha ou modelo",ph:"Ex.: Terno Alfaiataria Expressa"},{k:"valor",l:"Valor",ph:"R$"},{k:"inclui",l:"O que inclui",ph:"Ex.: ajustes"}], min:3},
+  {id:"v_med", t:"Valores do sob medida", type:"rows", cols:[{k:"modelo",l:"Opção",ph:"Ex.: Terno sob medida"},{k:"valor",l:"A partir de",ph:"R$"},{k:"inclui",l:"O que inclui",ph:"Ex.: tecido, 2 provas"}], min:2},
+  {id:"v_pag", t:"Formas de pagamento aceitas", type:"checks", opts:["Pix","Cartão de crédito","Cartão de débito","Dinheiro","Boleto","Transferência"]},
+  {id:"v_parc", t:"Parcelamento e descontos", type:"area", hint:"Em quantas vezes, com ou sem juros, desconto à vista ou no Pix."},
+  {id:"v_ia", t:"A IA pode informar valores aos clientes por mensagem?", type:"choice", opts:["Sim, a tabela completa","Só 'a partir de'","Não, só a equipe fala de valores"], hint:"Hoje a IA encaminha para a equipe. Aqui você decide."},
+ ]},
+ {id:"cmp", title:"4. Compra de traje pronto", sub:"", qs:[
+  {id:"c_prazo", t:"Quanto tempo leva para ficar pronto depois dos ajustes?", type:"text"},
+  {id:"c_aj", t:"Os ajustes estão incluídos no preço?", type:"choice", opts:["Sim, todos","Parte deles","Não, são cobrados"], fu:{when:["Parte deles","Não, são cobrados"], label:"Explique o que é cobrado."}},
+  {id:"c_troca", t:"Existe troca ou devolução?", type:"area"},
+  {id:"c_prov", t:"Quantas provas?", type:"text"},
+ ]},
+ {id:"med", title:"5. Sob medida", sub:"", qs:[
+  {id:"m_prov", t:"Quantas provas existem?", type:"text"},
+  {id:"m_tec", t:"Quais tecidos ou linhas a loja oferece?", type:"area"},
+  {id:"m_prazo", t:"Prazo de produção", type:"text"},
+  {id:"m_ant", t:"Antecedência mínima recomendada", type:"text"},
+  {id:"m_proc", t:"Como é o processo, do primeiro contato até a entrega?", type:"area", hint:"Em poucos passos. Isso ajuda a IA a explicar para o cliente."},
+ ]},
+ {id:"atd", title:"6. Atendimento e agenda", sub:"", qs:[
+  {id:"a_dur", t:"Quanto tempo dura uma visita?", type:"text"},
+  {id:"a_acomp", t:"Quantos acompanhantes o cliente pode levar na prova?", type:"text"},
+  {id:"a_grupo", t:"Vocês atendem o grupo de padrinhos junto?", type:"choice", opts:["Sim","Não","Depende"], fu:{when:["Sim","Depende"], label:"Como funciona (limite, horários)?"}},
+  {id:"a_plus", t:"Atendem tamanhos grandes (plus size)?", type:"choice", opts:["Sim","Não"], fu:{when:"Sim", label:"Até que numeração?"}},
+  {id:"a_unif", t:"Fazem uniformes corporativos?", type:"choice", opts:SIM_NAO},
+  {id:"a_agenda", t:"Como controlam a agenda de visitas hoje?", type:"area", hint:"Google Agenda, caderno, sistema. E quem confirma o horário."},
+  {id:"a_cancel", t:"Como funciona cancelar ou remarcar uma visita?", type:"area"},
+  {id:"a_transf", t:"Quando a IA passar o cliente para uma pessoa, quem assume e em qual horário?", type:"area"},
+ ]},
+ {id:"rep", title:"7. O que a Nobre pode dizer de si", sub:"Para a IA falar com segurança.", qs:[
+  {id:"r_1500", t:"Podemos citar 'mais de 1.500 noivos atendidos'?", type:"choice", opts:["Sim","Não","Número atualizado"], fu:{when:"Número atualizado", label:"Qual número?"}},
+  {id:"r_anos", t:"Podemos citar 'seis anos de atuação'?", type:"choice", opts:["Sim","Não","Número atualizado"], fu:{when:"Número atualizado", label:"Quantos anos?"}},
+  {id:"r_nota", t:"Podemos citar a nota 4,9 no Google e mais de 600 avaliações?", type:"choice", opts:["Sim","Não","Número atualizado"], fu:{when:"Número atualizado", label:"Qual nota e quantas avaliações?"}},
+  {id:"r_dif", t:"O que a Nobre faz melhor que as outras lojas?", type:"area", hint:"Diga com as suas palavras, em até 3 ou 4 itens."},
+  {id:"r_nao", t:"Existe algum assunto que a IA NÃO deve tratar?", type:"area", hint:"Por exemplo: falar de preço, prometer prazo, negociar desconto."},
+ ]},
+ {id:"faq", title:"8. Perguntas reais dos clientes", sub:"A parte mais valiosa. Pense nas que se repetem no WhatsApp e escreva como você costuma responder.", qs:[
+  {id:"faq_l", t:"Pergunta do cliente e sua resposta", type:"faq", min:5, hint:"Quanto mais, melhor. Pode usar suas próprias palavras."},
+  {id:"faq_cola", t:"Se preferir, cole aqui conversas antigas (sem dados pessoais)", type:"area", hint:"Pode copiar do WhatsApp. Tire sobrenome, telefone e endereço dos clientes."},
+ ]},
+];
+
+// ====== ESTADO ======
+let S = {a:{}, ns:{}, fu:{}};
+try{ const raw = localStorage.getItem(STORE_KEY); if(raw) S = Object.assign({a:{}, ns:{}, fu:{}}, JSON.parse(raw)); }catch(e){}
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(S)); $("#saved").textContent = "Salvo neste aparelho às " + new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }catch(e){}
+  progress();
+}
+function has(q){
+  if(S.ns[q.id]) return true;
+  const v = S.a[q.id];
+  if(v == null) return false;
+  if(typeof v === "string") return v.trim() !== "";
+  if(Array.isArray(v)) return v.some(x => typeof x === "string" ? x.trim() : Object.values(x).some(y => String(y).trim()));
+  return Object.keys(v).length > 0;
+}
+const ALLQ = SCHEMA.flatMap(b => b.qs);
+function progress(){
+  const n = ALLQ.filter(has).length, p = Math.round(n / ALLQ.length * 100);
+  $("#pct").textContent = p + "%"; $("#fill").style.width = p + "%"; $("#cnt").textContent = n + " de " + ALLQ.length;
+}
+
+// ====== RENDER ======
+function fieldHTML(q){
+  const id = q.id, v = S.a[id];
+  if(q.type === "text") return `<input type="text" data-id="${id}" value="${esc(v)}">`;
+  if(q.type === "area") return `<textarea data-id="${id}">${esc(v)}</textarea>`;
+  if(q.type === "choice"){
+    const o = q.opts.map(x => `<label class="opt"><input type="radio" name="${id}" data-id="${id}" value="${esc(x)}" ${v===x?"checked":""}>${esc(x)}</label>`).join("");
+    let fu = "";
+    if(q.fu){
+      const whens = [].concat(q.fu.when), show = whens.includes(v);
+      fu = `<div class="fu" ${show?"":"hidden"} data-fu="${id}"><p class="hint">${esc(q.fu.label)}</p><input type="text" data-fu-id="${id}" value="${esc(S.fu[id])}"></div>`;
+    }
+    return `<div class="opts">${o}</div>${fu}`;
+  }
+  if(q.type === "checks"){
+    const cur = v || [];
+    return `<div class="opts">` + q.opts.map(x => `<label class="opt"><input type="checkbox" data-chk="${id}" value="${esc(x)}" ${cur.includes(x)?"checked":""}>${esc(x)}</label>`).join("") + `</div>`;
+  }
+  if(q.type === "matrix"){
+    const cur = v || {};
+    return `<table class="mx"><tr><th></th>${q.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr>` +
+      q.items.map((it,i) => `<tr><td>${esc(it)}</td>${q.cols.map(c=>`<td><input type="radio" name="${id}_${i}" data-mx="${id}" data-item="${esc(it)}" value="${esc(c)}" ${cur[it]===c?"checked":""}></td>`).join("")}</tr>`).join("") + `</table>`;
+  }
+  if(q.type === "rows" || q.type === "faq"){
+    const rows = (v && v.length) ? v : Array.from({length:q.min}, () => ({}));
+    const cols = q.type === "faq" ? [{k:"p",l:"Pergunta do cliente",ph:"Ex.: Vocês alugam terno para formatura?"},{k:"r",l:"Sua resposta",ph:"Como você responde"}] : q.cols;
+    const html = rows.map((r,i) => `<div class="row ${q.type==="faq"?"faq":""}" style="--n:${cols.length}">` +
+      cols.map(c => q.type==="faq" && c.k==="r"
+        ? `<textarea data-row="${id}" data-i="${i}" data-k="${c.k}" placeholder="${esc(c.ph)}">${esc(r[c.k])}</textarea>`
+        : `<input type="text" data-row="${id}" data-i="${i}" data-k="${c.k}" placeholder="${esc(c.l)}: ${esc(c.ph)}" value="${esc(r[c.k])}">`).join("") + `</div>`).join("");
+    return `<div data-rows="${id}">${html}</div><button type="button" data-add="${id}">+ Adicionar linha</button>`;
+  }
+  return "";
+}
+function render(){
+  $("#root").innerHTML = SCHEMA.map(b => `<section class="blk"><h2>${esc(b.title)}</h2>${b.sub?`<p class="sub">${esc(b.sub)}</p>`:""}` +
+    b.qs.map(q => `<div class="q ${S.ns[q.id]?"is-ns":""}" data-q="${q.id}"><label class="t">${esc(q.t)}</label>${q.hint?`<p class="hint">${esc(q.hint)}</p>`:""}<div class="field">${fieldHTML(q)}</div>${q.noNS?"":`<label class="ns"><input type="checkbox" data-ns="${q.id}" ${S.ns[q.id]?"checked":""}> Não sei / outra pessoa responde</label>`}</div>`).join("") + `</section>`).join("");
+  progress();
+}
+render();
+
+// ====== EVENTOS ======
+const root = $("#root");
+function qById(id){ return ALLQ.find(q => q.id === id); }
+function setRow(id, i, k, val){ const arr = (S.a[id] = S.a[id] || []); while(arr.length <= i) arr.push({}); arr[i][k] = val; }
+root.addEventListener("input", e => {
+  const t = e.target;
+  if(t.dataset.id && (t.type === "text" || t.tagName === "TEXTAREA")) S.a[t.dataset.id] = t.value;
+  else if(t.dataset.fuId) S.fu[t.dataset.fuId] = t.value;
+  else if(t.dataset.row) setRow(t.dataset.row, +t.dataset.i, t.dataset.k, t.value);
+  else return;
+  save();
+});
+root.addEventListener("change", e => {
+  const t = e.target;
+  if(t.dataset.ns){ S.ns[t.dataset.ns] = t.checked; t.closest(".q").classList.toggle("is-ns", t.checked); save(); return; }
+  if(t.type === "radio" && t.dataset.id){
+    S.a[t.dataset.id] = t.value;
+    const q = qById(t.dataset.id);
+    if(q.fu){ const box = root.querySelector(`[data-fu="${q.id}"]`); box.hidden = ![].concat(q.fu.when).includes(t.value); }
+    save(); return;
+  }
+  if(t.dataset.chk){ const arr = S.a[t.dataset.chk] = S.a[t.dataset.chk] || []; const i = arr.indexOf(t.value); if(t.checked && i<0) arr.push(t.value); if(!t.checked && i>=0) arr.splice(i,1); save(); return; }
+  if(t.dataset.mx){ const o = S.a[t.dataset.mx] = S.a[t.dataset.mx] || {}; o[t.dataset.item] = t.value; save(); }
+});
+root.addEventListener("click", e => {
+  const id = e.target.dataset.add; if(!id) return;
+  const arr = (S.a[id] = S.a[id] || []); const q = qById(id);
+  while(arr.length < q.min) arr.push({}); arr.push({}); save();
+  const y = scrollY; render(); scrollTo(0, y);
+});
+
+// ====== MARKDOWN ======
+function answerMD(q){
+  if(S.ns[q.id]) return "_Não sei / outra pessoa responde_";
+  const v = S.a[q.id];
+  if(!has(q)) return "_(sem resposta)_";
+  if(q.type === "choice"){ const f = (S.fu[q.id]||"").trim(); return v + (f ? ` — ${f}` : ""); }
+  if(q.type === "checks") return v.join(", ");
+  if(q.type === "matrix") return q.items.filter(i => v[i]).map(i => `- ${i}: ${v[i]}`).join("\n");
+  if(q.type === "rows"){ const cols = q.cols; return v.filter(r => cols.some(c => (r[c.k]||"").trim())).map(r => "- " + cols.map(c => `${c.l}: ${(r[c.k]||"—").trim()}`).join(" | ")).join("\n"); }
+  if(q.type === "faq") return v.filter(r => (r.p||"").trim() || (r.r||"").trim()).map((r,i) => `${i+1}. **P:** ${(r.p||"—").trim()}\n   **R:** ${(r.r||"—").trim()}`).join("\n");
+  return String(v).trim();
+}
+function buildMD(){
+  const nome = (S.a.nome||"").trim() || "(sem nome)", fn = (S.a.funcao||"").trim();
+  let md = `# Respostas do formulário — Nobre Alfaiataria\n\n- Respondente: ${nome}${fn?` (${fn})`:""}\n- Data: ${new Date().toLocaleString("pt-BR")}\n`;
+  SCHEMA.forEach(b => { if(b.id === "quem") return;
+    md += `\n## ${b.title}\n`;
+    b.qs.forEach(q => { md += `\n**${q.t}**\n${answerMD(q)}\n`; });
+  });
+  return md;
+}
+
+// ====== ENVIO ======
+function msg(text, kind){ const m = $("#msg"); m.className = "msg " + kind; m.textContent = text; m.scrollIntoView({block:"center"}); }
+$("#f").addEventListener("submit", async e => {
+  e.preventDefault();
+  if($("#site").value) return; // anti-robô
+  if(!ALLQ.some(q => has(q) && q.id !== "nome" && q.id !== "funcao")){ msg("Preencha pelo menos uma resposta antes de enviar.", "err"); return; }
+  const btn = $("#send"); btn.disabled = true; btn.textContent = "Enviando…";
+  const payload = {respondente: ((S.a.nome||"") + " " + (S.a.funcao ? "(" + S.a.funcao + ")" : "")).trim() || null, respostas: {a:S.a, ns:S.ns, fu:S.fu}, markdown: buildMD()};
+  try{
+    const r = await fetch(SUPABASE_URL + "/rest/v1/nobre_respostas", {method:"POST", headers:{"Content-Type":"application/json", apikey:SUPABASE_ANON, Authorization:"Bearer " + SUPABASE_ANON, Prefer:"return=minimal"}, body:JSON.stringify(payload)});
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    msg("Respostas enviadas. Muito obrigado! Se lembrar de mais algo, é só preencher e enviar de novo.", "ok");
+  }catch(err){
+    msg("Não consegui enviar agora. Use os botões 'Enviar pelo WhatsApp' ou 'Baixar arquivo .md' abaixo. Suas respostas continuam salvas neste aparelho.", "err");
+  }finally{ btn.disabled = false; btn.textContent = "Enviar respostas"; }
+});
+$("#dl").addEventListener("click", () => {
+  const blob = new Blob([buildMD()], {type:"text/markdown;charset=utf-8"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "respostas-nobre-" + new Date().toISOString().slice(0,10) + ".md"; a.click(); URL.revokeObjectURL(a.href);
+});
+$("#wa").addEventListener("click", () => {
+  let t = buildMD();
+  if(t.length > 3500){ t = t.slice(0, 3400) + "\n\n…(resposta longa: vou também enviar o arquivo .md)"; alert("O texto é grande para o WhatsApp. Vou enviar o começo. Use também 'Baixar arquivo .md' e anexe o arquivo na conversa."); }
+  window.open("https://wa.me/" + WHATSAPP_DESTINO + "?text=" + encodeURIComponent(t), "_blank");
+});
+</script>
+</body>
+</html>

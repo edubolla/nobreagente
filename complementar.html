@@ -76,7 +76,7 @@
   <div class="intro">
     <strong>Como funciona</strong>
     <ul>
-      <li>Leva uns 20 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
+      <li>Leva uns 20 a 25 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
       <li>Não sabe a resposta? Marque <b>"Não sei / outra pessoa responde"</b>. Pode deixar em branco também.</li>
       <li>No fim, aperte <b>Enviar respostas</b>. Se algo falhar, há um botão para baixar o arquivo.</li>
     </ul>
@@ -113,7 +113,7 @@ const SCHEMA = [
  {id:"conf", title:"1. Confirmações rápidas", sub:"Dúvidas que sobraram da primeira parte. São respostas curtas.", qs:[
   {id:"colete", t:"Na Linha Clássica (calça e paletó), o colete pode ser alugado à parte?", type:"choice", opts:["Sim, cobrado à parte","Não oferecemos","Já está incluso"], fu:{when:"Sim, cobrado à parte", label:"Qual o valor do colete?"}},
   {id:"costume", t:"Qual é a diferença entre 'Costume' e 'Terno'?", type:"area", hint:"Na primeira parte, o sob medida aparece como Costume (a partir de R$ 4.500) e Terno (a partir de R$ 5.000)."},
-  {id:"compra_linhas", t:"Na compra de traje pronto, além do Costume (R$ 1.590), existem outras linhas?", type:"rows", cols:[{k:"linha",l:"Linha ou modelo",ph:"Ex.: Terno slim"},{k:"valor",l:"Valor",ph:"R$"},{k:"obs",l:"Observação",ph:"Tecido, o que inclui"}], min:2},
+  {id:"compra_linhas", t:"Na compra de traje pronto, além do Costume, existem outras linhas?", type:"rows", cols:[{k:"linha",l:"Linha ou modelo",ph:"Ex.: Terno slim"},{k:"valor",l:"Valor",ph:"R$"},{k:"obs",l:"Observação",ph:"Tecido, o que inclui"}], min:2},
   {id:"tecidos", t:"Quais tecidos o sob medida oferece?", type:"area", hint:"Pode listar do mais simples ao mais nobre. Diga a partir de qual tecido vale o preço 'a partir de R$ 4.500'."},
   {id:"rasgo", t:"Se o traje alugado rasgar, qual é a cobrança?", type:"area", hint:"Na primeira parte aparece 'valor da promissória'. Qual é esse valor?"},
   {id:"avulsa", t:"A locação avulsa 'até 1 dia antes' depende de estoque do modelo e do tamanho?", type:"choice", opts:["Sim, depende do estoque","Não, sempre dá"]},
@@ -123,8 +123,8 @@ const SCHEMA = [
   {id:"compl", t:"A IA pode informar os valores dos complementos (camisa, sapato, gravata)?", type:"choice", opts:["Sim, pode informar","Não, só diz que são cobrados à parte"]},
   {id:"hor_transf", t:"Quando a IA passar o cliente para a equipe, em quais horários alguém assume a conversa?", type:"text", hint:"Ex.: segunda a sexta, das 9h às 18h; sábado até 17h."},
  ]},
- {id:"conv_out", title:"2. Conferindo com as conversas de outubro", sub:"Vimos conversas reais da equipe com clientes e queremos confirmar alguns pontos com você.", qs:[
-  {id:"v590", t:"Em algumas conversas a locação de paletó e calça aparece a R$ 590, e em outras como 'a partir de R$ 690'. O que faz mudar o valor?", type:"area", hint:"Ex.: linha, tecido, modelo, data."},
+ {id:"conv_out", title:"2. Conferindo com as conversas do Tintim", sub:"Vimos conversas reais da equipe com clientes e queremos confirmar alguns pontos com você.", qs:[
+  {id:"v590", t:"Nas conversas, a locação aparece a R$ 590 (paletó e calça) e a R$ 690 (paletó, calça e colete). Qual é a regra? E qual valor a IA deve dizer como 'a partir de'?", type:"area", hint:"Ex.: linha, tecido, modelo, data."},
   {id:"c1690", t:"Compra de paletó e calça: no formulário você informou R$ 1.590. Nas conversas, a equipe falou R$ 1.590 de abril a julho e R$ 1.690 de agosto a outubro. Qual vale hoje?", type:"choice", opts:["R$ 1.590","R$ 1.690","Depende do modelo"], fu:{when:"Depende do modelo", label:"Explique."}},
   {id:"prem", t:"Linha Premium (paletó, calça e colete): no formulário está R$ 990. Nas conversas a equipe falou R$ 690 (julho a outubro) e R$ 900 (junho e julho). Qual é o valor de hoje e como se chama cada linha?", type:"area"},
   {id:"pad_tab", t:"Tabela de padrinhos nas conversas: individual R$ 590 (antes R$ 490) e, a partir de 6 padrinhos incluindo os pais, R$ 420 (antes R$ 390; 7 a 10 R$ 360; 11 ou mais R$ 330). Qual é a tabela de hoje?", type:"area"},
@@ -135,7 +135,6 @@ const SCHEMA = [
   {id:"slots_ia", t:"A IA pode oferecer essa lista de horários, ou só a equipe?", type:"choice", opts:["A IA pode oferecer a lista","Só a equipe oferece horários"]},
   {id:"avulsa_pecas", t:"Os clientes perguntam se alugam só calça, camisa ou sapato. Vocês alugam peças avulsas?", type:"choice", opts:["Sim","Não","Só alguns itens"], fu:{when:["Sim","Só alguns itens"], label:"Quais itens e a que valor?"}},
   {id:"ret_antes", t:"O cliente pode retirar o traje antes da quinta, ou outra pessoa devolver por ele?", type:"area", hint:"Responda os dois casos."},
-  {id:"mud_end", t:"Alguns clientes perguntam se a loja mudou de endereço. Houve mudança recente?", type:"choice", opts:["Não","Sim"], fu:{when:"Sim", label:"Quando foi e de qual endereço?"}},
   {id:"aj70", t:"Numa conversa, 'ajuste simples' aparece a R$ 70 por ponto. Quando isso é cobrado?", type:"area"},
   {id:"reserva_ex", t:"Se o cliente não paga o contrato, a reserva é cancelada? Em quantos dias?", type:"text"},
   {id:"online", t:"Vimos que é possível fechar e pagar online (Pix ou link) e ir à loja só na medição. A IA pode oferecer essa opção?", type:"choice", opts:["Sim, pode oferecer","Não, só a equipe oferece"]},
@@ -144,7 +143,7 @@ const SCHEMA = [
   {id:"fup24", t:"A IA pode fazer o primeiro retorno 1 a 2 dias depois da prova, citando o traje que o cliente provou?", type:"choice", opts:["Sim","Não, só as consultoras fazem follow-up"]},
  ]},
  {id:"nao", title:"3. O que a IA não deve fazer", sub:"Para ela saber os limites.", qs:[
-  {id:"nao_tratar", t:"Marque o que a IA NÃO deve fazer:", type:"checks", opts:["Negociar desconto","Prometer prazo de produção","Confirmar estoque de modelo ou tamanho","Confirmar horário de visita sozinha","Falar de concorrentes","Falar de preço antes de entender o pedido","Falar sobre políticas de avaria e atraso"]},
+  {id:"nao_tratar", t:"Marque o que a IA NÃO deve fazer:", type:"checks", opts:["Negociar desconto","Prometer prazo de produção","Confirmar estoque de modelo ou tamanho","Confirmar horário de visita sozinha","Falar de concorrentes","Falar de preço antes de entender o pedido"]},
   {id:"nao_outro", t:"Algo mais que a IA não deve tratar?", type:"area"},
  ]},
  {id:"faq", title:"4. Perguntas reais dos clientes", sub:"A parte mais valiosa. Pense nas mensagens que mais chegam no WhatsApp e responda como a equipe responde.", qs:[

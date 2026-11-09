@@ -76,7 +76,7 @@
   <div class="intro">
     <strong>Como funciona</strong>
     <ul>
-      <li>Leva uns 15 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
+      <li>Leva uns 20 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
       <li>Não sabe a resposta? Marque <b>"Não sei / outra pessoa responde"</b>. Pode deixar em branco também.</li>
       <li>No fim, aperte <b>Enviar respostas</b>. Se algo falhar, há um botão para baixar o arquivo.</li>
     </ul>
@@ -123,21 +123,37 @@ const SCHEMA = [
   {id:"compl", t:"A IA pode informar os valores dos complementos (camisa, sapato, gravata)?", type:"choice", opts:["Sim, pode informar","Não, só diz que são cobrados à parte"]},
   {id:"hor_transf", t:"Quando a IA passar o cliente para a equipe, em quais horários alguém assume a conversa?", type:"text", hint:"Ex.: segunda a sexta, das 9h às 18h; sábado até 17h."},
  ]},
- {id:"nao", title:"2. O que a IA não deve fazer", sub:"Para ela saber os limites.", qs:[
+ {id:"conv_out", title:"2. Conferindo com as conversas de outubro", sub:"Vimos conversas reais da equipe com clientes e queremos confirmar alguns pontos com você.", qs:[
+  {id:"v590", t:"Em algumas conversas a locação de paletó e calça aparece a R$ 590, e em outras como 'a partir de R$ 690'. O que faz mudar o valor?", type:"area", hint:"Ex.: linha, tecido, modelo, data."},
+  {id:"c1690", t:"Compra de paletó e calça: no formulário você informou R$ 1.590, e numa conversa a equipe falou R$ 1.690. Qual vale hoje?", type:"choice", opts:["R$ 1.590","R$ 1.690","Depende do modelo"], fu:{when:"Depende do modelo", label:"Explique."}},
+  {id:"p420", t:"Padrinhos e pais: a equipe falou R$ 420 por traje. Esse valor vale para todos os casos de padrinhos?", type:"area"},
+  {id:"d15", t:"Vimos um desconto de 15% no traje para um grupo com 8 padrinhos. Como funciona essa regra de desconto?", type:"area", hint:"Para quem vale, a partir de quantos padrinhos, em quais linhas."},
+  {id:"d15_ia", t:"A IA pode citar esse desconto aos clientes?", type:"choice", opts:["Sim, pode citar","Não, só a equipe fala de desconto"]},
+  {id:"ret_h", t:"Retirada entre 9h e 16h e devolução entre 9h e 18h: vale todos os dias, inclusive sábado?", type:"choice", opts:SIM_NAO, fu:{when:"Não", label:"Quais são os horários corretos?"}},
+  {id:"slots", t:"Quais horários de visita a IA pode oferecer ao cliente?", type:"area", hint:"Vimos listas como 10h, 11h, 13h, 14h, 15h, 16h e 17h aos sábados. Vale para dias úteis? Qual é o último horário?"},
+  {id:"slots_ia", t:"A IA pode oferecer essa lista de horários, ou só a equipe?", type:"choice", opts:["A IA pode oferecer a lista","Só a equipe oferece horários"]},
+  {id:"reserva_ex", t:"Se o cliente não paga o contrato, a reserva é cancelada? Em quantos dias?", type:"text"},
+  {id:"online", t:"Vimos que é possível fechar e pagar online (Pix ou link) e ir à loja só na medição. A IA pode oferecer essa opção?", type:"choice", opts:["Sim, pode oferecer","Não, só a equipe oferece"]},
+  {id:"vestido", t:"Quando o cliente procura vestido, a IA pode indicar outra loja?", type:"choice", opts:["Sim","Não"], fu:{when:"Sim", label:"Qual loja pode ser indicada?"}},
+  {id:"vaga", t:"Para quem encaminhar quem pergunta sobre vaga de emprego?", type:"text"},
+  {id:"fup24", t:"A IA pode fazer o primeiro retorno 1 a 2 dias depois da prova, citando o traje que o cliente provou?", type:"choice", opts:["Sim","Não, só as consultoras fazem follow-up"]},
+  {id:"priv", t:"Na compra, as 3 provas são 'privad...' (privativas?). O que você quis dizer?", type:"text"},
+ ]},
+ {id:"nao", title:"3. O que a IA não deve fazer", sub:"Para ela saber os limites.", qs:[
   {id:"nao_tratar", t:"Marque o que a IA NÃO deve fazer:", type:"checks", opts:["Negociar desconto","Prometer prazo de produção","Confirmar estoque de modelo ou tamanho","Confirmar horário de visita sozinha","Falar de concorrentes","Falar de preço antes de entender o pedido","Falar sobre políticas de avaria e atraso"]},
   {id:"nao_outro", t:"Algo mais que a IA não deve tratar?", type:"area"},
  ]},
- {id:"faq", title:"3. Perguntas reais dos clientes", sub:"A parte mais valiosa. Pense nas mensagens que mais chegam no WhatsApp e responda como a equipe responde.", qs:[
+ {id:"faq", title:"4. Perguntas reais dos clientes", sub:"A parte mais valiosa. Pense nas mensagens que mais chegam no WhatsApp e responda como a equipe responde.", qs:[
   {id:"faq_l", t:"Pergunta do cliente e sua resposta", type:"faq", min:10, hint:"Quanto mais, melhor. Use suas próprias palavras, do jeito que vocês falam com o cliente."},
   {id:"obj", t:"Objeções: o que o cliente diz para não fechar, e como vocês respondem", type:"rows", cols:[{k:"obj",l:"O que o cliente diz",ph:"Ex.: Achei caro / Vou pensar"},{k:"resp",l:"Como vocês respondem",ph:"Sua resposta"}], min:5, hint:"Ex.: preço, concorrente, data, indecisão."},
  ]},
- {id:"tom", title:"4. Jeito de falar da Nobre", sub:"Para a IA soar como vocês.", qs:[
+ {id:"tom", title:"5. Jeito de falar da Nobre", sub:"Para a IA soar como vocês.", qs:[
   {id:"saud", t:"Como vocês cumprimentam um cliente novo no WhatsApp?", type:"area", hint:"Cole a mensagem que costumam mandar."},
   {id:"fup", t:"Que mensagem vocês mandam quando o cliente some (follow-up)?", type:"area", hint:"Cole um exemplo."},
   {id:"pos", t:"E depois da visita, ou depois do evento (pós-venda)?", type:"area"},
   {id:"tratam", t:"Vocês tratam o cliente por 'você' ou 'senhor/senhora'? Usam emojis?", type:"choice", opts:["Você, com emojis","Você, sem emojis","Senhor ou senhora"]},
  ]},
- {id:"conv", title:"5. Conversas antigas", sub:"Opcional, mas é o que mais melhora o atendimento da IA.", qs:[
+ {id:"conv", title:"6. Conversas antigas", sub:"Opcional, mas é o que mais melhora o atendimento da IA.", qs:[
   {id:"conv_cola", t:"Cole aqui conversas antigas do WhatsApp (sem dados pessoais)", type:"area", hint:"Pode copiar de várias conversas, uma depois da outra. Tire sobrenome, telefone e endereço dos clientes. Se ficar grande, mande por partes."},
  ]},
 ];

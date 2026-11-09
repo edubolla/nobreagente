@@ -117,7 +117,7 @@ const SCHEMA = [
   {id:"tecidos", t:"Quais tecidos o sob medida oferece?", type:"area", hint:"Pode listar do mais simples ao mais nobre. Diga a partir de qual tecido vale o preço 'a partir de R$ 4.500'."},
   {id:"rasgo", t:"Se o traje alugado rasgar, qual é a cobrança?", type:"area", hint:"Na primeira parte aparece 'valor da promissória'. Qual é esse valor?"},
   {id:"avulsa", t:"A locação avulsa 'até 1 dia antes' depende de estoque do modelo e do tamanho?", type:"choice", opts:["Sim, depende do estoque","Não, sempre dá"]},
-  {id:"est_pago", t:"O estacionamento da Rua Dr. Messuti, 297, é:", type:"choice", opts:["Gratuito para o cliente","Pago pelo cliente","Conveniado (a loja cobre ou dá desconto)"], fu:{when:["Pago pelo cliente","Conveniado (a loja cobre ou dá desconto)"], label:"Explique (valor, como funciona)."}},
+  {id:"est_pago", t:"O estacionamento da Rua Dr. Messuti, 257, é:", type:"choice", opts:["Gratuito para o cliente","Pago pelo cliente","Conveniado (a loja cobre ou dá desconto)"], fu:{when:["Pago pelo cliente","Conveniado (a loja cobre ou dá desconto)"], label:"Explique (valor, como funciona)."}},
   {id:"desc", t:"Existe desconto para pagamento à vista ou no Pix?", type:"choice", opts:["Sim","Não"], fu:{when:"Sim", label:"De quanto, e em quais produtos?"}},
   {id:"juros", t:"O parcelamento (3x padrinhos, 6x noivos e compra) é sem juros?", type:"choice", opts:["Sem juros","Com juros","Depende"], fu:{when:["Com juros","Depende"], label:"Explique."}},
   {id:"compl", t:"A IA pode informar os valores dos complementos (camisa, sapato, gravata)?", type:"choice", opts:["Sim, pode informar","Não, só diz que são cobrados à parte"]},

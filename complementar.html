@@ -137,7 +137,6 @@ const SCHEMA = [
   {id:"vestido", t:"Quando o cliente procura vestido, a IA pode indicar outra loja?", type:"choice", opts:["Sim","Não"], fu:{when:"Sim", label:"Qual loja pode ser indicada?"}},
   {id:"vaga", t:"Para quem encaminhar quem pergunta sobre vaga de emprego?", type:"text"},
   {id:"fup24", t:"A IA pode fazer o primeiro retorno 1 a 2 dias depois da prova, citando o traje que o cliente provou?", type:"choice", opts:["Sim","Não, só as consultoras fazem follow-up"]},
-  {id:"priv", t:"Na compra, as 3 provas são 'privad...' (privativas?). O que você quis dizer?", type:"text"},
  ]},
  {id:"nao", title:"3. O que a IA não deve fazer", sub:"Para ela saber os limites.", qs:[
   {id:"nao_tratar", t:"Marque o que a IA NÃO deve fazer:", type:"checks", opts:["Negociar desconto","Prometer prazo de produção","Confirmar estoque de modelo ou tamanho","Confirmar horário de visita sozinha","Falar de concorrentes","Falar de preço antes de entender o pedido","Falar sobre políticas de avaria e atraso"]},
@@ -152,9 +151,6 @@ const SCHEMA = [
   {id:"fup", t:"Que mensagem vocês mandam quando o cliente some (follow-up)?", type:"area", hint:"Cole um exemplo."},
   {id:"pos", t:"E depois da visita, ou depois do evento (pós-venda)?", type:"area"},
   {id:"tratam", t:"Vocês tratam o cliente por 'você' ou 'senhor/senhora'? Usam emojis?", type:"choice", opts:["Você, com emojis","Você, sem emojis","Senhor ou senhora"]},
- ]},
- {id:"conv", title:"6. Conversas antigas", sub:"Opcional, mas é o que mais melhora o atendimento da IA.", qs:[
-  {id:"conv_cola", t:"Cole aqui conversas antigas do WhatsApp (sem dados pessoais)", type:"area", hint:"Pode copiar de várias conversas, uma depois da outra. Tire sobrenome, telefone e endereço dos clientes. Se ficar grande, mande por partes."},
  ]},
 ];
 

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nobre Alfaiataria · Formulário complementar</title>
+<style>
+  :root{
+    --bg:#f7f5f0; --card:#ffffff; --ink:#1b1a17; --muted:#6b675e; --line:#e4dfd3;
+    --gold:#b8922f; --gold-d:#8f6f1c; --dark:#15130f; --ok:#2f7a4b; --err:#b3392f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121110; --card:#1c1a17; --ink:#f1ede4; --muted:#a39d90; --line:#33302a;
+      --gold:#d4ad4a; --gold-d:#e6c46a; --dark:#0b0a09;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  header{background:var(--dark);color:#f1ede4;padding:28px 16px 22px;text-align:center;border-bottom:3px solid var(--gold)}
+  header h1{margin:0 0 6px;font:600 26px/1.2 Georgia,"Times New Roman",serif;letter-spacing:.5px;color:#e6c46a}
+  header p{margin:0 auto;max-width:560px;color:#d8d2c3;font-size:15px}
+  .bar{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px}
+  .bar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+  .track{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0;background:var(--gold);transition:width .3s}
+  main{max-width:760px;margin:0 auto;padding:20px 16px 80px}
+  .intro{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:15px}
+  .intro li{margin:4px 0}
+  section.blk{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;margin-bottom:18px}
+  section.blk>h2{margin:0 0 4px;font:600 21px/1.25 Georgia,serif}
+  section.blk>.sub{margin:0 0 14px;color:var(--muted);font-size:14px}
+  .q{padding:14px 0;border-top:1px solid var(--line)}
+  .q:first-of-type{border-top:0}
+  .q label.t{display:block;font-weight:600;margin-bottom:4px}
+  .hint{color:var(--muted);font-size:13px;margin:0 0 8px}
+  input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  textarea{min-height:84px;resize:vertical}
+  input[type=text]:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--line);border-radius:99px;background:var(--bg);cursor:pointer;font-size:15px}
+  .opt input{accent-color:var(--gold)}
+  .opt:has(input:checked){border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,transparent)}
+  .ns{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:13px;color:var(--muted);cursor:pointer}
+  .ns input{accent-color:var(--muted)}
+  .fu{margin-top:8px}
+  .q.is-ns .field{opacity:.4;pointer-events:none}
+  table.mx{width:100%;border-collapse:collapse;font-size:14px}
+  table.mx th,table.mx td{padding:8px 4px;text-align:center;border-bottom:1px solid var(--line)}
+  table.mx th:first-child,table.mx td:first-child{text-align:left}
+  table.mx input{accent-color:var(--gold);width:18px;height:18px}
+  .row{display:grid;gap:8px;grid-template-columns:repeat(var(--n),1fr);margin-bottom:8px}
+  .row.faq{grid-template-columns:1fr}
+  @media (max-width:560px){.row{grid-template-columns:1fr;padding:10px;border:1px dashed var(--line);border-radius:8px}}
+  button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--gold);padding:11px 18px;background:transparent;color:var(--gold-d);font-weight:600}
+  button.primary{background:var(--gold);color:#17130a;border-color:var(--gold)}
+  button:disabled{opacity:.5;cursor:wait}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:15px;display:none}
+  .msg.ok{display:block;background:color-mix(in srgb,var(--ok) 14%,transparent);border:1px solid var(--ok)}
+  .msg.err{display:block;background:color-mix(in srgb,var(--err) 12%,transparent);border:1px solid var(--err)}
+  .saved{font-size:12px;color:var(--muted);text-align:right;margin-top:-8px;margin-bottom:10px}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Nobre Alfaiataria</h1>
+  <p>Segunda parte, mais curta: últimas dúvidas e as perguntas reais dos seus clientes.</p>
+</header>
+<div class="bar"><div class="bar-in"><span id="pct">0%</span><div class="track"><div class="fill" id="fill"></div></div><span id="cnt">0 respondidas</span></div></div>
+
+<main>
+  <div class="intro">
+    <strong>Como funciona</strong>
+    <ul>
+      <li>Leva uns 15 minutos. Pode responder <b>em partes</b>: o que você preenche fica salvo neste aparelho, e é só abrir o mesmo link de novo.</li>
+      <li>Não sabe a resposta? Marque <b>"Não sei / outra pessoa responde"</b>. Pode deixar em branco também.</li>
+      <li>No fim, aperte <b>Enviar respostas</b>. Se algo falhar, há um botão para baixar o arquivo.</li>
+    </ul>
+  </div>
+  <div class="saved" id="saved"></div>
+  <form id="f" novalidate>
+    <input class="hp" type="text" name="site" id="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div id="root"></div>
+    <section class="blk">
+      <h2>Enviar</h2>
+      <p class="sub">Confira se quiser e envie. Dá para enviar de novo depois se lembrar de algo.</p>
+      <div class="actions">
+        <button type="submit" class="primary" id="send">Enviar respostas</button>
+        <button type="button" id="dl">Baixar arquivo .md</button>
+      </div>
+      <div class="msg" id="msg"></div>
+    </section>
+  </form>
+</main>
+
+<script>
+// ====== CONFIGURAÇÃO ======
+const SUPABASE_URL = "https://ilursypxumuuwuhrqmde.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsdXJzeXB4dW11dXd1aHJxbWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNzIyNzEsImV4cCI6MjEwOTY0ODI3MX0.xh-Srhwj0T_xg-W4EJeZHhviTLax659VwxSnkamS_6I";
+const STORE_KEY = "nobre_form_compl_v1";
+
+// ====== PERGUNTAS ======
+const SIM_NAO = ["Sim", "Não"];
+const SCHEMA = [
+ {id:"quem", title:"Quem está respondendo", sub:"Só para sabermos com quem tirar dúvidas depois.", qs:[
+  {id:"nome", t:"Seu nome", type:"text", noNS:true},
+  {id:"funcao", t:"Sua função na Nobre", type:"text", noNS:true},
+ ]},
+ {id:"conf", title:"1. Confirmações rápidas", sub:"Dúvidas que sobraram da primeira parte. São respostas curtas.", qs:[
+  {id:"colete", t:"Na Linha Clássica (calça e paletó), o colete pode ser alugado à parte?", type:"choice", opts:["Sim, cobrado à parte","Não oferecemos","Já está incluso"], fu:{when:"Sim, cobrado à parte", label:"Qual o valor do colete?"}},
+  {id:"costume", t:"Qual é a diferença entre 'Costume' e 'Terno'?", type:"area", hint:"Na primeira parte, o sob medida aparece como Costume (a partir de R$ 4.500) e Terno (a partir de R$ 5.000)."},
+  {id:"compra_linhas", t:"Na compra de traje pronto, além do Costume (R$ 1.590), existem outras linhas?", type:"rows", cols:[{k:"linha",l:"Linha ou modelo",ph:"Ex.: Terno slim"},{k:"valor",l:"Valor",ph:"R$"},{k:"obs",l:"Observação",ph:"Tecido, o que inclui"}], min:2},
+  {id:"tecidos", t:"Quais tecidos o sob medida oferece?", type:"area", hint:"Pode listar do mais simples ao mais nobre. Diga a partir de qual tecido vale o preço 'a partir de R$ 4.500'."},
+  {id:"rasgo", t:"Se o traje alugado rasgar, qual é a cobrança?", type:"area", hint:"Na primeira parte aparece 'valor da promissória'. Qual é esse valor?"},
+  {id:"avulsa", t:"A locação avulsa 'até 1 dia antes' depende de estoque do modelo e do tamanho?", type:"choice", opts:["Sim, depende do estoque","Não, sempre dá"]},
+  {id:"est_pago", t:"O estacionamento da Rua Dr. Messuti, 297, é:", type:"choice", opts:["Gratuito para o cliente","Pago pelo cliente","Conveniado (a loja cobre ou dá desconto)"], fu:{when:["Pago pelo cliente","Conveniado (a loja cobre ou dá desconto)"], label:"Explique (valor, como funciona)."}},
+  {id:"desc", t:"Existe desconto para pagamento à vista ou no Pix?", type:"choice", opts:["Sim","Não"], fu:{when:"Sim", label:"De quanto, e em quais produtos?"}},
+  {id:"juros", t:"O parcelamento (3x padrinhos, 6x noivos e compra) é sem juros?", type:"choice", opts:["Sem juros","Com juros","Depende"], fu:{when:["Com juros","Depende"], label:"Explique."}},
+  {id:"compl", t:"A IA pode informar os valores dos complementos (camisa, sapato, gravata)?", type:"choice", opts:["Sim, pode informar","Não, só diz que são cobrados à parte"]},
+  {id:"hor_transf", t:"Quando a IA passar o cliente para a equipe, em quais horários alguém assume a conversa?", type:"text", hint:"Ex.: segunda a sexta, das 9h às 18h; sábado até 17h."},
+ ]},
+ {id:"nao", title:"2. O que a IA não deve fazer", sub:"Para ela saber os limites.", qs:[
+  {id:"nao_tratar", t:"Marque o que a IA NÃO deve fazer:", type:"checks", opts:["Negociar desconto","Prometer prazo de produção","Confirmar estoque de modelo ou tamanho","Confirmar horário de visita sozinha","Falar de concorrentes","Falar de preço antes de entender o pedido","Falar sobre políticas de avaria e atraso"]},
+  {id:"nao_outro", t:"Algo mais que a IA não deve tratar?", type:"area"},
+ ]},
+ {id:"faq", title:"3. Perguntas reais dos clientes", sub:"A parte mais valiosa. Pense nas mensagens que mais chegam no WhatsApp e responda como a equipe responde.", qs:[
+  {id:"faq_l", t:"Pergunta do cliente e sua resposta", type:"faq", min:10, hint:"Quanto mais, melhor. Use suas próprias palavras, do jeito que vocês falam com o cliente."},
+  {id:"obj", t:"Objeções: o que o cliente diz para não fechar, e como vocês respondem", type:"rows", cols:[{k:"obj",l:"O que o cliente diz",ph:"Ex.: Achei caro / Vou pensar"},{k:"resp",l:"Como vocês respondem",ph:"Sua resposta"}], min:5, hint:"Ex.: preço, concorrente, data, indecisão."},
+ ]},
+ {id:"tom", title:"4. Jeito de falar da Nobre", sub:"Para a IA soar como vocês.", qs:[
+  {id:"saud", t:"Como vocês cumprimentam um cliente novo no WhatsApp?", type:"area", hint:"Cole a mensagem que costumam mandar."},
+  {id:"fup", t:"Que mensagem vocês mandam quando o cliente some (follow-up)?", type:"area", hint:"Cole um exemplo."},
+  {id:"pos", t:"E depois da visita, ou depois do evento (pós-venda)?", type:"area"},
+  {id:"tratam", t:"Vocês tratam o cliente por 'você' ou 'senhor/senhora'? Usam emojis?", type:"choice", opts:["Você, com emojis","Você, sem emojis","Senhor ou senhora"]},
+ ]},
+ {id:"conv", title:"5. Conversas antigas", sub:"Opcional, mas é o que mais melhora o atendimento da IA.", qs:[
+  {id:"conv_cola", t:"Cole aqui conversas antigas do WhatsApp (sem dados pessoais)", type:"area", hint:"Pode copiar de várias conversas, uma depois da outra. Tire sobrenome, telefone e endereço dos clientes. Se ficar grande, mande por partes."},
+ ]},
+];
+
+// ====== ESTADO ======
+let S = {a:{}, ns:{}, fu:{}};
+try{ const raw = localStorage.getItem(STORE_KEY); if(raw) S = Object.assign({a:{}, ns:{}, fu:{}}, JSON.parse(raw)); }catch(e){}
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(S)); $("#saved").textContent = "Salvo neste aparelho às " + new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }catch(e){}
+  progress();
+}
+function has(q){
+  if(S.ns[q.id]) return true;
+  const v = S.a[q.id];
+  if(v == null) return false;
+  if(typeof v === "string") return v.trim() !== "";
+  if(Array.isArray(v)) return v.some(x => typeof x === "string" ? x.trim() : Object.values(x).some(y => String(y).trim()));
+  return Object.keys(v).length > 0;
+}
+const ALLQ = SCHEMA.flatMap(b => b.qs);
+function progress(){
+  const n = ALLQ.filter(has).length, p = Math.round(n / ALLQ.length * 100);
+  $("#pct").textContent = p + "%"; $("#fill").style.width = p + "%"; $("#cnt").textContent = n + " de " + ALLQ.length;
+}
+
+// ====== RENDER ======
+function fieldHTML(q){
+  const id = q.id, v = S.a[id];
+  if(q.type === "text") return `<input type="text" data-id="${id}" value="${esc(v)}">`;
+  if(q.type === "area") return `<textarea data-id="${id}">${esc(v)}</textarea>`;
+  if(q.type === "choice"){
+    const o = q.opts.map(x => `<label class="opt"><input type="radio" name="${id}" data-id="${id}" value="${esc(x)}" ${v===x?"checked":""}>${esc(x)}</label>`).join("");
+    let fu = "";
+    if(q.fu){
+      const whens = [].concat(q.fu.when), show = whens.includes(v);
+      fu = `<div class="fu" ${show?"":"hidden"} data-fu="${id}"><p class="hint">${esc(q.fu.label)}</p><input type="text" data-fu-id="${id}" value="${esc(S.fu[id])}"></div>`;
+    }
+    return `<div class="opts">${o}</div>${fu}`;
+  }
+  if(q.type === "checks"){
+    const cur = v || [];
+    return `<div class="opts">` + q.opts.map(x => `<label class="opt"><input type="checkbox" data-chk="${id}" value="${esc(x)}" ${cur.includes(x)?"checked":""}>${esc(x)}</label>`).join("") + `</div>`;
+  }
+  if(q.type === "matrix"){
+    const cur = v || {};
+    return `<table class="mx"><tr><th></th>${q.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr>` +
+      q.items.map((it,i) => `<tr><td>${esc(it)}</td>${q.cols.map(c=>`<td><input type="radio" name="${id}_${i}" data-mx="${id}" data-item="${esc(it)}" value="${esc(c)}" ${cur[it]===c?"checked":""}></td>`).join("")}</tr>`).join("") + `</table>`;
+  }
+  if(q.type === "rows" || q.type === "faq"){
+    const rows = (v && v.length) ? v : Array.from({length:q.min}, () => ({}));
+    const cols = q.type === "faq" ? [{k:"p",l:"Pergunta do cliente",ph:"Ex.: Vocês alugam terno para formatura?"},{k:"r",l:"Sua resposta",ph:"Como você responde"}] : q.cols;
+    const html = rows.map((r,i) => `<div class="row ${q.type==="faq"?"faq":""}" style="--n:${cols.length}">` +
+      cols.map(c => q.type==="faq" && c.k==="r"
+        ? `<textarea data-row="${id}" data-i="${i}" data-k="${c.k}" placeholder="${esc(c.ph)}">${esc(r[c.k])}</textarea>`
+        : `<input type="text" data-row="${id}" data-i="${i}" data-k="${c.k}" placeholder="${esc(c.l)}: ${esc(c.ph)}" value="${esc(r[c.k])}">`).join("") + `</div>`).join("");
+    return `<div data-rows="${id}">${html}</div><button type="button" data-add="${id}">+ Adicionar linha</button>`;
+  }
+  return "";
+}
+function render(){
+  $("#root").innerHTML = SCHEMA.map(b => `<section class="blk"><h2>${esc(b.title)}</h2>${b.sub?`<p class="sub">${esc(b.sub)}</p>`:""}` +
+    b.qs.map(q => `<div class="q ${S.ns[q.id]?"is-ns":""}" data-q="${q.id}"><label class="t">${esc(q.t)}</label>${q.hint?`<p class="hint">${esc(q.hint)}</p>`:""}<div class="field">${fieldHTML(q)}</div>${q.noNS?"":`<label class="ns"><input type="checkbox" data-ns="${q.id}" ${S.ns[q.id]?"checked":""}> Não sei / outra pessoa responde</label>`}</div>`).join("") + `</section>`).join("");
+  progress();
+}
+render();
+
+// ====== EVENTOS ======
+const root = $("#root");
+function qById(id){ return ALLQ.find(q => q.id === id); }
+function setRow(id, i, k, val){ const arr = (S.a[id] = S.a[id] || []); while(arr.length <= i) arr.push({}); arr[i][k] = val; }
+root.addEventListener("input", e => {
+  const t = e.target;
+  if(t.dataset.id && (t.type === "text" || t.tagName === "TEXTAREA")) S.a[t.dataset.id] = t.value;
+  else if(t.dataset.fuId) S.fu[t.dataset.fuId] = t.value;
+  else if(t.dataset.row) setRow(t.dataset.row, +t.dataset.i, t.dataset.k, t.value);
+  else return;
+  save();
+});
+root.addEventListener("change", e => {
+  const t = e.target;
+  if(t.dataset.ns){ S.ns[t.dataset.ns] = t.checked; t.closest(".q").classList.toggle("is-ns", t.checked); save(); return; }
+  if(t.type === "radio" && t.dataset.id){
+    S.a[t.dataset.id] = t.value;
+    const q = qById(t.dataset.id);
+    if(q.fu){ const box = root.querySelector(`[data-fu="${q.id}"]`); box.hidden = ![].concat(q.fu.when).includes(t.value); }
+    save(); return;
+  }
+  if(t.dataset.chk){ const arr = S.a[t.dataset.chk] = S.a[t.dataset.chk] || []; const i = arr.indexOf(t.value); if(t.checked && i<0) arr.push(t.value); if(!t.checked && i>=0) arr.splice(i,1); save(); return; }
+  if(t.dataset.mx){ const o = S.a[t.dataset.mx] = S.a[t.dataset.mx] || {}; o[t.dataset.item] = t.value; save(); }
+});
+root.addEventListener("click", e => {
+  const id = e.target.dataset.add; if(!id) return;
+  const arr = (S.a[id] = S.a[id] || []); const q = qById(id);
+  while(arr.length < q.min) arr.push({}); arr.push({}); save();
+  const y = scrollY; render(); scrollTo(0, y);
+});
+
+// ====== MARKDOWN ======
+function answerMD(q){
+  if(S.ns[q.id]) return "_Não sei / outra pessoa responde_";
+  const v = S.a[q.id];
+  if(!has(q)) return "_(sem resposta)_";
+  if(q.type === "choice"){ const f = (S.fu[q.id]||"").trim(); return v + (f ? ` — ${f}` : ""); }
+  if(q.type === "checks") return v.join(", ");
+  if(q.type === "matrix") return q.items.filter(i => v[i]).map(i => `- ${i}: ${v[i]}`).join("\n");
+  if(q.type === "rows"){ const cols = q.cols; return v.filter(r => cols.some(c => (r[c.k]||"").trim())).map(r => "- " + cols.map(c => `${c.l}: ${(r[c.k]||"—").trim()}`).join(" | ")).join("\n"); }
+  if(q.type === "faq") return v.filter(r => (r.p||"").trim() || (r.r||"").trim()).map((r,i) => `${i+1}. **P:** ${(r.p||"—").trim()}\n   **R:** ${(r.r||"—").trim()}`).join("\n");
+  return String(v).trim();
+}
+function buildMD(){
+  const nome = (S.a.nome||"").trim() || "(sem nome)", fn = (S.a.funcao||"").trim();
+  let md = `# Respostas do formulário COMPLEMENTAR — Nobre Alfaiataria\n\n- Respondente: ${nome}${fn?` (${fn})`:""}\n- Data: ${new Date().toLocaleString("pt-BR")}\n`;
+  SCHEMA.forEach(b => { if(b.id === "quem") return;
+    md += `\n## ${b.title}\n`;
+    b.qs.forEach(q => { md += `\n**${q.t}**\n${answerMD(q)}\n`; });
+  });
+  return md;
+}
+
+// ====== ENVIO ======
+function msg(text, kind){ const m = $("#msg"); m.className = "msg " + kind; m.textContent = text; m.scrollIntoView({block:"center"}); }
+$("#f").addEventListener("submit", async e => {
+  e.preventDefault();
+  if($("#site").value) return; // anti-robô
+  if(!ALLQ.some(q => has(q) && q.id !== "nome" && q.id !== "funcao")){ msg("Preencha pelo menos uma resposta antes de enviar.", "err"); return; }
+  const btn = $("#send"); btn.disabled = true; btn.textContent = "Enviando…";
+  const payload = {formulario:"complementar", respondente: ((S.a.nome||"") + " " + (S.a.funcao ? "(" + S.a.funcao + ")" : "")).trim() || null, respostas: {a:S.a, ns:S.ns, fu:S.fu}, markdown: buildMD()};
+  try{
+    const r = await fetch(SUPABASE_URL + "/rest/v1/nobre_respostas", {method:"POST", headers:{"Content-Type":"application/json", apikey:SUPABASE_ANON, Authorization:"Bearer " + SUPABASE_ANON, Prefer:"return=minimal"}, body:JSON.stringify(payload)});
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    msg("Respostas enviadas. Muito obrigado! Se lembrar de mais algo, é só preencher e enviar de novo.", "ok");
+  }catch(err){
+    msg("Não consegui enviar agora. Use o botão 'Baixar arquivo .md' abaixo e envie o arquivo para nós. Suas respostas continuam salvas neste aparelho.", "err");
+  }finally{ btn.disabled = false; btn.textContent = "Enviar respostas"; }
+});
+$("#dl").addEventListener("click", () => {
+  const blob = new Blob([buildMD()], {type:"text/markdown;charset=utf-8"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "respostas-complementar-nobre-" + new Date().toISOString().slice(0,10) + ".md"; a.click(); URL.revokeObjectURL(a.href);
+});
+</script>
+</body>
+</html>
